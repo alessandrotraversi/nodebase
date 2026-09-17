@@ -3,11 +3,17 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module.js';
+import { ObserveInstrument } from './observe/observe.js';
 import { SecretsService } from './secrets/secrets.service.js';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
-  const app = await NestFactory.create(AppModule);
+  // `instrument` must be passed here, not just ObserveModule imported in
+  // AppModule — this is the hook that lets the agent wrap providers as
+  // Nest constructs them, before any of the app's own code runs.
+  const app = await NestFactory.create(AppModule, {
+    instrument: ObserveInstrument,
+  });
   app.use(helmet());
 
   const config = new DocumentBuilder()
