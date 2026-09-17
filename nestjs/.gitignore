@@ -127,6 +127,27 @@ desktop.ini
 docker-compose.override.yml
 
 # ==============================
+# Terraform
+# ==============================
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+# .terraform.lock.hcl is intentionally NOT ignored — commit it per
+# environment so everyone (and CI) resolves the same provider versions.
+# Per-environment backend config (bucket/table names) — never shared secrets,
+# but still environment-specific and not meant to be committed.
+backend.hcl
+
+# ==============================
 # Misc
 # ==============================
 *.tgz

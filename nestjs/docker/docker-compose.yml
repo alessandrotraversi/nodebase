@@ -21,6 +21,11 @@ services:
 
   # Local AWS emulator (https://floci.io) used here as a Secrets Manager /
   # SSM Parameter Store stand-in for development — no real AWS account needed.
+  #
+  # Secrets are provisioned with Terraform, not seeded by this compose file —
+  # after `docker compose up -d floci`, run:
+  #   cd terraform/environments/dev && terraform init && terraform apply
+  # See terraform/README.md.
   floci:
     image: floci/floci:latest-compat
     ports:
@@ -29,8 +34,6 @@ services:
       FLOCI_DEFAULT_REGION: ${AWS_REGION:-us-east-1}
       FLOCI_STORAGE_MODE: persistent
     volumes:
-      # Init hook scripts (see floci/init/ready.d) that seed local secrets.
-      - ./floci/init:/etc/floci/init
       - floci-data:/app/data
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:4566/_localstack/health']

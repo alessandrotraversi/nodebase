@@ -24,7 +24,11 @@
     "docker:build": "docker compose -f docker/docker-compose.yml build",
     "docker:up": "docker compose -f docker/docker-compose.yml up --build",
     "docker:down": "docker compose -f docker/docker-compose.yml down -v",
-    "docker:logs": "docker compose -f docker/docker-compose.yml logs -f"
+    "docker:logs": "docker compose -f docker/docker-compose.yml logs -f",
+    "tf:dev:init": "terraform -chdir=terraform/environments/dev init",
+    "tf:dev:plan": "terraform -chdir=terraform/environments/dev plan",
+    "tf:dev:apply": "terraform -chdir=terraform/environments/dev apply",
+    "tf:dev:destroy": "terraform -chdir=terraform/environments/dev destroy"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.1135.0",
