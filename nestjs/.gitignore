@@ -1,0 +1,138 @@
+# ==============================
+# Dependencies
+# ==============================
+node_modules/
+jspm_packages/
+.pnp/
+.pnp.js
+.pnp.cjs
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+bower_components/
+
+# ==============================
+# Build output
+# ==============================
+dist/
+build/
+out/
+*.tsbuildinfo
+.nest/
+
+# ==============================
+# Logs
+# ==============================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==============================
+# Testing / coverage
+# ==============================
+coverage/
+*.lcov
+.nyc_output/
+test-results/
+playwright-report/
+
+# ==============================
+# Environment variables / secrets
+# ==============================
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.cert
+*.p12
+
+# ==============================
+# Runtime data
+# ==============================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ==============================
+# Cache directories
+# ==============================
+.cache/
+.eslintcache
+.stylelintcache
+.turbo/
+.parcel-cache/
+.swc/
+.vite/
+.rollup.cache/
+
+# ==============================
+# Package manager files
+# ==============================
+.npm/
+.pnpm-store/
+.yarn-integrity
+
+# ==============================
+# TypeScript
+# ==============================
+*.tsbuildinfo
+next-env.d.ts
+
+# ==============================
+# mise (tool version manager)
+# ==============================
+.mise.local.toml
+mise.local.toml
+
+# ==============================
+# Editors / IDEs
+# ==============================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# ==============================
+# OS files
+# ==============================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Docker
+# ==============================
+docker-compose.override.yml
+
+# ==============================
+# Misc
+# ==============================
+*.tgz
+*.tar.gz
+.vercel/
+.serverless/
+.dynamodb/
+.tern-port
+.history/
