@@ -1,0 +1,44 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '${PORT:-3000}:3000'
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+      # Points the AWS SDK at the local Floci emulator instead of real AWS.
+      AWS_ENDPOINT_URL: http://floci:4566
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-test}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-test}
+      SECRETS_MANAGER_SECRET_ID: ${SECRETS_MANAGER_SECRET_ID:-app/database}
+    depends_on:
+      floci:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Local AWS emulator (https://floci.io) used here as a Secrets Manager /
+  # SSM Parameter Store stand-in for development — no real AWS account needed.
+  floci:
+    image: floci/floci:latest-compat
+    ports:
+      - '4566:4566'
+    environment:
+      FLOCI_DEFAULT_REGION: ${AWS_REGION:-us-east-1}
+      FLOCI_STORAGE_MODE: persistent
+    volumes:
+      # Init hook scripts (see floci/init/ready.d) that seed local secrets.
+      - ./floci/init:/etc/floci/init
+      - floci-data:/app/data
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:4566/_localstack/health']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  floci-data:
